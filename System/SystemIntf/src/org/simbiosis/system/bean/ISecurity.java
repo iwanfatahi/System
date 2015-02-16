@@ -14,6 +14,6 @@ public interface ISecurity {
 	//
 
 	void saveSession(Session session);
-	
+
 	Session getSession(String session);
 }

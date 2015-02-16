@@ -8,7 +8,6 @@ import javax.ejb.Stateless;
 import javax.xml.bind.DatatypeConverter;
 
 import org.simbiosis.system.api.bean.ISessionManager;
-import org.simbiosis.system.api.dto.SessionDto;
 import org.simbiosis.system.bean.ISecurity;
 import org.simbiosis.system.bean.IUser;
 import org.simbiosis.system.model.OperationLog;
@@ -63,13 +62,6 @@ public class SessionManager implements ISessionManager {
 	}
 
 	@Override
-	public SessionDto loginWithMenu(String userName, String password,
-			String salt) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void logout(String sessionName) {
 		Session session = iSecurity.getSession(sessionName);
 		if (session != null) {
@@ -80,15 +72,6 @@ public class SessionManager implements ISessionManager {
 			systemLog.sendOperationLog(new OperationLog(session.getUser()
 					.getId(), session.getName(), "LOGOUT"));
 		}
-	}
-
-	@Override
-	public Boolean isValid(String sessionName) {
-		Session session = iSecurity.getSession(sessionName);
-		if (session != null) {
-			return session.getValid() == 1;
-		}
-		return false;
 	}
 
 }

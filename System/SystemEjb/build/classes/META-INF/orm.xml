@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd">
+	<persistence-unit-metadata>
+		<persistence-unit-defaults>
+			<access>FIELD</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<entity class="org.simbiosis.system.model.Company">
+		<table name="SYS_COMPANY">
+		</table>
+		<named-query name="listCompany">
+			<query>select x from Company x</query>
+		</named-query>
+		<named-query name="findCompanyByCode">
+			<query>select x from Company x where x.code=:code</query>
+		</named-query>
+		<attributes>
+			<id name="id">
+				<column name="COM_ID" />
+				<generated-value strategy="TABLE" generator="sys_company_id" />
+				<table-generator name="sys_company_id"
+					pk-column-value="sys_company_id" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="code">
+				<column name="COM_CODE" length="30" />
+			</basic>
+			<basic name="name">
+				<column name="COM_NAME" length="50" />
+			</basic>
+			<basic name="address">
+				<column name="COM_ADDRESS" length="100" />
+			</basic>
+			<basic name="datapath">
+				<column name="COM_DATAPATH" length="100" />
+			</basic>
+			<one-to-many name="branches" mapped-by="company">
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.system.model.Branch">
+		<table name="SYS_BRANCH">
+		</table>
+		<named-query name="listBranchByCompany">
+			<query>select x from Branch x where x.company.id=:companyId</query>
+		</named-query>
+		<named-query name="findBranchByCode">
+			<query>select x from Branch x where x.company.id=:companyId and x.code=:code</query>
+		</named-query>
+		<attributes>
+			<id name="id">
+				<column name="BRN_ID" />
+				<generated-value strategy="TABLE" generator="sys_branch_id" />
+				<table-generator name="sys_branch_id"
+					pk-column-value="sys_branch_id" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="code">
+				<column name="BRN_CODE" length="30" />
+			</basic>
+			<basic name="name">
+				<column name="BRN_NAME" length="50" />
+			</basic>
+			<basic name="address">
+				<column name="BRN_ADDRESS" length="100" />
+			</basic>
+			<basic name="param1">
+				<column name="BRN_PARAM1" />
+			</basic>
+			<basic name="param2">
+				<column name="BRN_PARAM2" />
+			</basic>
+			<basic name="param3">
+				<column name="BRN_PARAM3" />
+			</basic>
+			<basic name="param4">
+				<column name="BRN_PARAM4" />
+			</basic>
+			<many-to-one name="company">
+				<join-column name="COM_ID" referenced-column-name="COM_ID" />
+			</many-to-one>
+			<one-to-many name="subBranches" mapped-by="branch">
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.system.model.SubBranch">
+		<table name="SYS_SUBBRANCH">
+		</table>
+		<named-query name="listSubBranch1">
+			<query>select x from SubBranch x where x.company.id=:company</query>
+		</named-query>
+		<named-query name="listSubBranch2">
+			<query>select x from SubBranch x where x.branch.id=:branch</query>
+		</named-query>
+		<attributes>
+			<id name="id">
+				<column name="SBR_ID" />
+				<generated-value strategy="TABLE" generator="sys_subbranch_id" />
+				<table-generator name="sys_subbranch_id"
+					pk-column-value="sys_subbranch_id" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="code">
+				<column name="SBR_CODE" length="30" />
+			</basic>
+			<basic name="name">
+				<column name="SBR_NAME" length="50" />
+			</basic>
+			<basic name="address">
+				<column name="SBR_ADDRESS" length="100" />
+			</basic>
+			<many-to-one name="company">
+				<join-column name="COM_ID" referenced-column-name="COM_ID" />
+			</many-to-one>
+			<many-to-one name="branch">
+				<join-column name="BRN_ID" referenced-column-name="BRN_ID" />
+			</many-to-one>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.system.model.Auth">
+		<table name="SYS_AUTH">
+		</table>
+		<named-query name="getAuthByKey">
+			<query>select x from Auth x where x.key=:key and x.active=1</query>
+		</named-query>
+		<named-query name="listAuthByCompany">
+			<query>select x from Auth x where x.company.id=:company and x.level&gt;=:level and x.active=1 and x.authorizer is null order by x.branch.id</query>
+		</named-query>
+		<named-query name="listAuthByBranch">
+			<query>select x from Auth x where x.branch.id=:branch and x.level&gt;=:level and x.active=1 and x.authorizer is null order by x.branch.id</query>
+		</named-query>
+		<attributes>
+			<id name="id">
+				<column name="AUT_ID" />
+				<generated-value strategy="TABLE" generator="sys_auth_id" />
+				<table-generator name="sys_auth_id"
+					pk-column-value="sys_auth_id" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="description">
+				<column name="AUT_DESCRIPTION" length="500" />
+			</basic>
+			<basic name="timestamp">
+				<column name="AUT_TIMESTAMP" />
+			</basic>
+			<basic name="level">
+				<column name="AUT_LEVEL" />
+			</basic>
+			<basic name="active">
+				<column name="AUT_ACTIVE" />
+			</basic>
+			<basic name="key">
+				<column name="AUT_KEY" length="100" />
+			</basic>
+			<many-to-one name="company">
+				<join-column name="COM_ID" referenced-column-name="COM_ID" />
+			</many-to-one>
+			<many-to-one name="branch">
+				<join-column name="BRN_ID" referenced-column-name="BRN_ID" />
+			</many-to-one>
+			<many-to-one name="user">
+				<join-column name="USR_ID" referenced-column-name="USR_ID" />
+			</many-to-one>
+			<many-to-one name="authorizer">
+				<join-column name="AUT_AUTHORIZER"
+					referenced-column-name="USR_ID" />
+			</many-to-one>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.system.model.Role">
+		<table name="SYS_ROLE">
+		</table>
+		<named-query name="listRoles">
+			<query>select x from Role x where x.company.id=:company</query>
+		</named-query>
+		<attributes>
+			<id name="id">
+				<column name="ROL_ID" />
+				<generated-value strategy="TABLE" generator="sys_role_id" />
+				<table-generator name="sys_role_id"
+					pk-column-value="sys_role_id" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="name">
+				<column name="ROL_NAME" length="50" />
+			</basic>
+			<basic name="description">
+				<column name="ROL_DESCRIPTION" length="100" />
+			</basic>
+			<many-to-one name="company">
+				<join-column name="COM_ID" referenced-column-name="COM_ID" />
+			</many-to-one>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.system.model.Config">
+		<table name="SYS_CONFIG">
+		</table>
+		<named-query name="getConfigValue">
+			<query>select x from Config x where x.company.id=:company and x.key=:key</query>
+		</named-query>
+		<attributes>
+			<id name="id">
+				<column name="CFG_ID" />
+				<generated-value strategy="TABLE" generator="sys_config_id" />
+				<table-generator name="sys_config_id"
+					pk-column-value="sys_config_id" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="key">
+				<column name="CFG_KEY" length="100" />
+			</basic>
+			<basic name="strValue">
+				<column name="CFG_STRVALUE" length="500" />
+			</basic>
+			<basic name="longValue">
+				<column name="CFG_LONGVALUE" />
+			</basic>
+			<basic name="intValue">
+				<column name="CFG_INTVALUE" />
+			</basic>
+			<basic name="doubleValue">
+				<column name="CFG_DOUBLEVALUE" />
+			</basic>
+			<many-to-one name="company">
+				<join-column name="COM_ID" referenced-column-name="COM_ID" />
+			</many-to-one>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.system.model.User">
+		<table name="SYS_USER">
+		</table>
+		<named-query name="getUserByName">
+			<query>select x from User x where x.name=:name</query>
+		</named-query>
+		<named-query name="listUsers1">
+			<query>select x from User x where x.company.id=:company order by x.branch,x.name</query>
+		</named-query>
+		<named-query name="listUsers2">
+			<query>select x from User x where x.branch.id=:branch order by x.name</query>
+		</named-query>
+		<named-query name="listActiveUsers1">
+			<query>select x from User x where x.active=1 and x.company.id=:company order by x.branch,x.name</query>
+		</named-query>
+		<named-query name="listActiveUsers2">
+			<query>select x from User x where x.active=1 and x.branch.id=:branch order by x.name</query>
+		</named-query>
+		<attributes>
+			<id name="id">
+				<column name="USR_ID" />
+				<generated-value strategy="TABLE" generator="sys_user_id" />
+				<table-generator name="sys_user_id"
+					pk-column-value="sys_user_id" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="name">
+				<column name="USR_NAME" length="50" />
+			</basic>
+			<basic name="realName">
+				<column name="USR_REALNAME" length="150" />
+			</basic>
+			<basic name="password">
+				<column name="USR_PASSWORD" length="100" />
+			</basic>
+			<basic name="email">
+				<column name="USR_EMAIL" length="100" />
+			</basic>
+			<basic name="level">
+				<column name="USR_LEVEL" />
+			</basic>
+			<basic name="active">
+				<column name="USR_ACTIVE" />
+			</basic>
+			<basic name="type">
+				<column name="USR_TYPE"/>
+			</basic>
+			<basic name="userUpdate">
+				<column name="USR_USERUPDATE"/>
+			</basic>
+			<basic name="userCreate">
+				<column name="USR_USERCREATE"/>
+			</basic>
+			<basic name="tsUpdate">
+				<column name="USR_TSUPDATE"/>
+			</basic>
+			<basic name="tsCreate">
+				<column name="USR_TSCREATE"/>
+			</basic>
+			<many-to-one name="role">
+				<join-column name="ROL_ID" referenced-column-name="ROL_ID" />
+			</many-to-one>
+			<many-to-one name="company">
+				<join-column name="COM_ID" referenced-column-name="COM_ID" />
+			</many-to-one>
+			<many-to-one name="branch">
+				<join-column name="BRN_ID" referenced-column-name="BRN_ID" />
+			</many-to-one>
+			<many-to-one name="subBranch">
+				<join-column name="SBR_ID" referenced-column-name="SBR_ID" />
+			</many-to-one>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.system.model.Session">
+		<table name="SYS_SESSION">
+		</table>
+		<named-query name="getSessionByName">
+			<query>select x from Session x where x.valid=1 and x.name=:name</query>
+		</named-query>
+		<named-query name="getSessionByUser">
+			<query>select x from Session x where x.valid=1 and x.user.id=:user</query>
+		</named-query>
+		<attributes>
+			<id name="id">
+				<column name="SES_ID" />
+				<generated-value strategy="TABLE" generator="sys_session_id" />
+				<table-generator name="sys_session_id"
+					pk-column-value="sys_session_id" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="name">
+				<column name="SES_NAME" />
+			</basic>
+			<basic name="begin">
+				<column name="SES_BEGIN" />
+			</basic>
+			<basic name="end">
+				<column name="SES_END" />
+			</basic>
+			<basic name="valid">
+				<column name="SES_VALID" />
+			</basic>
+			<many-to-one name="user">
+				<join-column name="USR_ID" referenced-column-name="USR_ID" />
+			</many-to-one>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.system.model.Salt">
+		<table name="SYS_SALT">
+		</table>
+		<attributes>
+			<id name="value">
+				<column name="SLT_VALUE" length="100"/>
+			</id>
+			<basic name="timestamp">
+				<column name="SLT_TIMESTAMP"/>
+			</basic>
+			<basic name="valid">
+				<column name="SLT_VALID"/>
+			</basic>
+		</attributes>
+	</entity>
+</entity-mappings>

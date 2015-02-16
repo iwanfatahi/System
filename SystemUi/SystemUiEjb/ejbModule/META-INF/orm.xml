@@ -5,4 +5,93 @@
 			<access>FIELD</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
+	<entity class="org.simbiosis.systemui.model.Application">
+		<table name="SYS_APPLICATION">
+		</table>
+		<attributes>
+			<id name="id">
+				<column name="APP_ID"/>
+				<generated-value strategy="TABLE" generator="sys_application_id"/>
+				<table-generator name="sys_application_id" pk-column-value="sys_application_id" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="name">
+				<column name="APP_NAME" length="50"/>
+			</basic>
+			<one-to-many name="menus" mapped-by="application">
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.systemui.model.CompanyApplication">
+		<table name="SYS_COMPANYAPPLICATION">
+		</table>
+		<attributes>
+			<id name="id">
+				<column name="CAP_ID"/>
+				<generated-value strategy="TABLE" generator="sys_companyapplication_id"/>
+				<table-generator name="sys_companyapplication_id" pk-column-value="sys_companyapplication_id" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="company">
+				<column name="CAP_COMPANY"/>
+			</basic>
+			<one-to-one name="application">
+				<join-column name="APP_ID" referenced-column-name="APP_ID"/>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.systemui.model.Menu">
+		<table name="SYS_MENU">
+		</table>
+		<named-query name="listMenuByCompany">
+			<query>select x from Menu x,CompanyApplication y where x.application.id=y.application.id and x.level=3 and y.company=:company</query>
+		</named-query>
+		<named-query name="listMenuByRoleModule">
+			<query>select x from Menu x,RoleMenu y where x.id=y.menu.id and y.role=:role and x.module=:module</query>
+		</named-query>
+		<attributes>
+			<id name="id">
+				<column name="MEN_ID"/>
+			</id>
+			<basic name="title">
+				<column name="MEN_TITLE" length="100"/>
+			</basic>
+			<basic name="place">
+				<column name="MEN_PLACE" length="300"/>
+			</basic>
+			<basic name="level">
+				<column name="MEN_LEVEL"/>
+			</basic>
+			<basic name="module">
+				<column name="MEN_MODULE" length="100"/>
+			</basic>
+			<basic name="icon">
+				<column name="MEN_ICON" length="100"/>
+			</basic>
+			<many-to-one name="parent">
+				<join-column name="PARENT_ID" referenced-column-name="MEN_ID"/>
+			</many-to-one>
+			<many-to-one name="application">
+				<join-column name="APP_ID" referenced-column-name="APP_ID"/>
+			</many-to-one>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.systemui.model.RoleMenu">
+		<table name="SYS_ROLEMENU">
+		</table>
+		<attributes>
+			<id name="id">
+				<column name="RLM_ID"/>
+				<generated-value strategy="TABLE" generator="sys_rolemenu_id"/>
+				<table-generator name="sys_rolemenu_id" pk-column-value="sys_rolemenu_id" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="role">
+				<column name="RLM_ROLE"/>
+			</basic>
+			<one-to-one name="menu">
+				<join-column name="MEN_ID" referenced-column-name="MEN_ID"/>
+			</one-to-one>
+		</attributes>
+	</entity>
 </entity-mappings>

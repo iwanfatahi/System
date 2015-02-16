@@ -28,7 +28,6 @@ public class SessionApi {
 	@Produces("text/plain")
 	public String login(@FormParam("userName") String userName,
 			@FormParam("password") String password) {
-		System.out.println(userName + ", " + password);
 		return sessionManager.login(userName, password);
 	}
 
@@ -38,13 +37,6 @@ public class SessionApi {
 	public String logout(@PathParam("sessionName") String sessionName) {
 		sessionManager.logout(sessionName);
 		return "0";
-	}
-
-	@GET()
-	@Path("/isvalid/{sessionName}")
-	@Produces("text/plain")
-	public String isValid(@PathParam("sessionName") String sessionName) {
-		return sessionManager.isValid(sessionName) ? "1" : "0";
 	}
 
 }
