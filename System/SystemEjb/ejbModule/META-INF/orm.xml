@@ -36,8 +36,6 @@
 			<basic name="datapath">
 				<column name="COM_DATAPATH" length="100" />
 			</basic>
-			<one-to-many name="branches" mapped-by="company">
-			</one-to-many>
 		</attributes>
 	</entity>
 	<entity class="org.simbiosis.system.model.Branch">
@@ -81,15 +79,13 @@
 			<many-to-one name="company">
 				<join-column name="COM_ID" referenced-column-name="COM_ID" />
 			</many-to-one>
-			<one-to-many name="subBranches" mapped-by="branch">
-			</one-to-many>
 		</attributes>
 	</entity>
 	<entity class="org.simbiosis.system.model.SubBranch">
 		<table name="SYS_SUBBRANCH">
 		</table>
 		<named-query name="listSubBranch1">
-			<query>select x from SubBranch x where x.company.id=:company</query>
+			<query>select x from SubBranch x where x.company=:company</query>
 		</named-query>
 		<named-query name="listSubBranch2">
 			<query>select x from SubBranch x where x.branch.id=:branch</query>
@@ -111,9 +107,9 @@
 			<basic name="address">
 				<column name="SBR_ADDRESS" length="100" />
 			</basic>
-			<many-to-one name="company">
-				<join-column name="COM_ID" referenced-column-name="COM_ID" />
-			</many-to-one>
+			<basic name="company">
+				<column name="COM_ID"/>
+			</basic>
 			<many-to-one name="branch">
 				<join-column name="BRN_ID" referenced-column-name="BRN_ID" />
 			</many-to-one>

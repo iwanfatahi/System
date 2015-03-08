@@ -1,8 +1,6 @@
 package org.simbiosis.system.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Branch implements Serializable {
 	/**
@@ -19,7 +17,6 @@ public class Branch implements Serializable {
 	long param4;
 
 	Company company;
-	List<SubBranch> subBranches = new ArrayList<SubBranch>();
 
 	public long getId() {
 		return id;
@@ -59,14 +56,6 @@ public class Branch implements Serializable {
 
 	public void setCompany(Company company) {
 		this.company = company;
-	}
-
-	public List<SubBranch> getSubBranches() {
-		return subBranches;
-	}
-
-	public void setSubBranches(List<SubBranch> subBranches) {
-		this.subBranches = subBranches;
 	}
 
 	public long getParam1() {

@@ -12,7 +12,7 @@ public class SubBranch implements Serializable {
 	String name;
 	String address;
 
-	Company company;
+	long company;
 	Branch branch;
 
 	public long getId() {
@@ -55,11 +55,11 @@ public class SubBranch implements Serializable {
 		this.branch = branch;
 	}
 
-	public Company getCompany() {
+	public long getCompany() {
 		return company;
 	}
 
-	public void setCompany(Company company) {
+	public void setCompany(long company) {
 		this.company = company;
 	}
 
