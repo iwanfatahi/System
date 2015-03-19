@@ -283,6 +283,9 @@
 			<basic name="tsCreate">
 				<column name="USR_TSCREATE"/>
 			</basic>
+			<basic name="firstModule">
+				<column name="USR_FIRSTMODULE"/>
+			</basic>
 			<many-to-one name="role">
 				<join-column name="ROL_ID" referenced-column-name="ROL_ID" />
 			</many-to-one>

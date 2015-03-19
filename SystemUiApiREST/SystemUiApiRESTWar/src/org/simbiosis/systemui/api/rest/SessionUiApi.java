@@ -1,12 +1,15 @@
 package org.simbiosis.systemui.api.rest;
 
 import javax.ejb.EJB;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.simbiosis.systemui.api.bean.IUISessionManager;
+import org.simbiosis.systemui.api.dto.SimpleSessionDto;
 import org.simbiosis.systemui.api.dto.SessionDto;
 
 @Path("/session")
@@ -17,9 +20,9 @@ public class SessionUiApi {
 
 	@GET()
 	@Path("/isvalid/{sessionName}")
-	@Produces("text/plain")
-	public String isValid(@PathParam("sessionName") String sessionName) {
-		return sessionManager.isValid(sessionName) ? "1" : "0";
+	@Produces("application/json")
+	public SimpleSessionDto isValid(@PathParam("sessionName") String sessionName) {
+		return sessionManager.isValid(sessionName);
 	}
 
 	@GET()
@@ -30,4 +33,13 @@ public class SessionUiApi {
 			@PathParam("moduleName") String moduleName) {
 		return sessionManager.getLoginInfo(sessionName, moduleName);
 	}
+
+	@POST()
+	@Path("/login")
+	@Produces("application/json")
+	public SimpleSessionDto login(@FormParam("userName") String userName,
+			@FormParam("password") String password) {
+		return sessionManager.login(userName, password);
+	}
+
 }

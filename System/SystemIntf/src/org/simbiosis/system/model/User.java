@@ -25,8 +25,9 @@ public class User implements Serializable {
 	int level;
 	int active;
 	int type;
-	Role role;
+	String firstModule;
 
+	Role role;
 	Company company;
 	Branch branch;
 	SubBranch subBranch;
@@ -162,6 +163,14 @@ public class User implements Serializable {
 
 	public void setUserUpdate(long userUpdate) {
 		this.userUpdate = userUpdate;
+	}
+
+	public String getFirstModule() {
+		return firstModule;
+	}
+
+	public void setFirstModule(String firstModule) {
+		this.firstModule = firstModule;
 	}
 
 }

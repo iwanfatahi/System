@@ -7,6 +7,7 @@
 		<project>SystemUiApiEjb</project>
 		<project>SystemIntf</project>
 		<project>SystemUiIntf</project>
+		<project>SystemApiIntf</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

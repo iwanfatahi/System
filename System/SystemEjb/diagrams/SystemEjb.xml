@@ -2,7 +2,7 @@
 	<entity>
 		<entity-name>org.simbiosis.system.model.User</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>406</entity-height>
+		<entity-height>426</entity-height>
 		<entity-X-Coordinate>649</entity-X-Coordinate>
 		<entity-Y-Coordinate>424</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
