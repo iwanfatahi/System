@@ -4,6 +4,8 @@ import org.simbiosis.system.model.Session;
 
 public interface ISecurity {
 	String getRandomHash(int length);
+	
+	String getUriRandomHash();
 
 	String registerSalt();
 

@@ -9,8 +9,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.simbiosis.systemui.api.bean.IUISessionManager;
-import org.simbiosis.systemui.api.dto.SimpleSessionDto;
 import org.simbiosis.systemui.api.dto.SessionDto;
+import org.simbiosis.systemui.api.dto.SimpleSessionDto;
 
 @Path("/session")
 public class SessionUiApi {
@@ -31,6 +31,7 @@ public class SessionUiApi {
 	public SessionDto getLoginInfo(
 			@PathParam("sessionName") String sessionName,
 			@PathParam("moduleName") String moduleName) {
+		System.out.println("Test");
 		return sessionManager.getLoginInfo(sessionName, moduleName);
 	}
 

@@ -45,7 +45,7 @@ public class SessionManager implements ISessionManager {
 			User user = iUser.getUserByName(userName);
 			if (user != null && user.getPassword().equalsIgnoreCase(password)
 					&& user.getActive() == 1) {
-				Session session = new Session(iSecurity.getRandomHash(32), user);
+				Session session = new Session(iSecurity.getUriRandomHash(), user);
 				iSecurity.saveSession(session);
 				// Hapus salt
 				iSecurity.unregisterSalt(salt);
