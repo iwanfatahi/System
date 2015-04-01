@@ -31,7 +31,6 @@ public class SessionUiApi {
 	public SessionDto getLoginInfo(
 			@PathParam("sessionName") String sessionName,
 			@PathParam("moduleName") String moduleName) {
-		System.out.println("Test");
 		return sessionManager.getLoginInfo(sessionName, moduleName);
 	}
 

@@ -61,7 +61,8 @@ public class UISessionManager implements IUISessionManager {
 				mdto.setId(menu.getId());
 				mdto.setTitle(menu.getTitle());
 				mdto.setIcon(menu.getIcon());
-				mdto.setLink(menu.getPlace());
+				String[] placeStrings = menu.getPlace().split("\\.");
+				mdto.setLink(placeStrings[placeStrings.length - 1]);
 				Menu parent = menu.getParent();
 				if (parent != null) {
 					mdto.setParentTitle(parent.getTitle());
