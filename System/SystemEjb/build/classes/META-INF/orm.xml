@@ -227,10 +227,13 @@
 	<entity class="org.simbiosis.system.model.User">
 		<table name="SYS_USER">
 		</table>
+		<named-query name="getActiveUserByName">
+			<query>select x from User x where x.name=:name and x.active=1</query>
+		</named-query>
 		<named-query name="getUserByName">
 			<query>select x from User x where x.name=:name</query>
 		</named-query>
-		<named-query name="listUsers1">
+				<named-query name="listUsers1">
 			<query>select x from User x where x.company.id=:company order by x.branch,x.name</query>
 		</named-query>
 		<named-query name="listUsers2">
