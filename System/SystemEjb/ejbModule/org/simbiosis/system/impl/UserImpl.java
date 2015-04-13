@@ -31,4 +31,16 @@ public class UserImpl implements IUser {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public User getActiveUserByName(String name) {
+		Query qry = em.createNamedQuery("getActiveUserByName");
+		qry.setParameter("name", name);
+		List<User> users = qry.getResultList();
+		if (users.size() == 1) {
+			return users.get(0);
+		}
+		return null;
+	}
+
 }
