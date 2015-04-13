@@ -78,6 +78,30 @@ public class SecurityImpl implements ISecurity {
 	}
 
 	@Override
+	public String getUriRandomHash(String prefix) {
+		try {
+			// Initialize SecureRandom
+			// This is a lengthy operation, to be done only upon
+			// initialization of the application
+			SecureRandom prng = SecureRandom.getInstance("SHA1PRNG");
+
+			// generate a random number
+			String randomNum = new Integer(prng.nextInt()).toString();
+			String toHash = randomNum + "_" + prefix;
+
+			// get its digest
+			MessageDigest sha = MessageDigest.getInstance("SHA-1");
+			byte[] result = sha.digest(toHash.getBytes());
+
+			return hexEncode(result);
+
+		} catch (NoSuchAlgorithmException ex) {
+			System.err.println(ex);
+		}
+		return "";
+	}
+
+	@Override
 	public String registerSalt() {
 		Salt salt = new Salt(getRandomHash(8));
 		em.persist(salt);

@@ -15,6 +15,8 @@ public class HttpRestClient {
 	String postLogin = "http://localhost:8080/systemapi/session/login";
 	String getLogout = "http://localhost:8080/systemapi/session/logout";
 
+	String postRegistration = "http://api.croowd.co.id/registration/create";
+
 	public static void main(String[] args) {
 		new HttpRestClient().testIt();
 	}
@@ -46,10 +48,12 @@ public class HttpRestClient {
 	}
 
 	private void testIt() {
-		for (int i = 0; i < 1; i++) {
-			MyThread thr = new MyThread();
-			thr.start();
-		}
+		// for (int i = 0; i < 1; i++) {
+		// MyThread thr = new MyThread();
+		// thr.start();
+		// }
+		post(postRegistration,
+				"{\"name\":\"Iwan Agus Fatahi\",\"email\":\"iwanfatahi@gmail.com\",\"invest\":0,\"principal\":200000,\"tenor\":6}");
 	}
 
 	private HttpURLConnection createConnection(String strUrl)
@@ -95,8 +99,8 @@ public class HttpRestClient {
 		try {
 			HttpURLConnection con = createConnection(url);
 			con.setRequestMethod("POST");
-			con.setRequestProperty("Content-Type",
-					"application/x-www-form-urlencoded");
+			// con.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+			con.setRequestProperty("Content-Type", "application/json");
 			con.setRequestProperty("Content-Length",
 					"" + Integer.toString(params.getBytes().length));
 			con.setRequestProperty("Content-Language", "en-US");
