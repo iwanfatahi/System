@@ -7,4 +7,5 @@ public interface ISessionManager {
 
 	void logout(String sessionName);
 
+	Boolean isValid(String sessionName);
 }

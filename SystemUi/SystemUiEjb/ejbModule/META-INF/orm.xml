@@ -68,6 +68,9 @@
 			<basic name="icon">
 				<column name="MEN_ICON" length="100"/>
 			</basic>
+			<basic name="order">
+				<column name="MEN_ORDER"/>
+			</basic>
 			<many-to-one name="parent">
 				<join-column name="PARENT_ID" referenced-column-name="MEN_ID"/>
 			</many-to-one>

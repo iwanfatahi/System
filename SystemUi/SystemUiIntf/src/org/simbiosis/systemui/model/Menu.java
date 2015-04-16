@@ -9,6 +9,7 @@ public class Menu implements Serializable {
 	 */
 	private static final long serialVersionUID = -5330497849439890759L;
 	long id;
+	int order;
 	String title;
 	String module;
 	String place;
@@ -17,6 +18,14 @@ public class Menu implements Serializable {
 
 	Application application;
 	Menu parent;
+
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
 
 	public long getId() {
 		return id;

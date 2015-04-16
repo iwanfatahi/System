@@ -45,7 +45,8 @@ public class SessionManager implements ISessionManager {
 			User user = iUser.getActiveUserByName(userName);
 			if (user != null && user.getPassword().equalsIgnoreCase(password)
 					&& user.getActive() == 1) {
-				Session session = new Session(iSecurity.getUriRandomHash(), user);
+				Session session = new Session(iSecurity.getUriRandomHash(),
+						user);
 				iSecurity.saveSession(session);
 				// Hapus salt
 				iSecurity.unregisterSalt(salt);
@@ -72,6 +73,13 @@ public class SessionManager implements ISessionManager {
 			systemLog.sendOperationLog(new OperationLog(session.getUser()
 					.getId(), session.getName(), "LOGOUT"));
 		}
+	}
+
+	@Override
+	public Boolean isValid(String sessionName) {
+		// FIXME:Belum ada logikanya
+		Session session = iSecurity.getSession(sessionName);
+		return session != null;
 	}
 
 }
