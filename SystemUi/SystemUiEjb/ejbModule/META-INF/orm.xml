@@ -47,7 +47,7 @@
 			<query>select x from Menu x,CompanyApplication y where x.application.id=y.application.id and x.level=3 and y.company=:company</query>
 		</named-query>
 		<named-query name="listMenuByRoleModule">
-			<query>select x from Menu x,RoleMenu y where x.id=y.menu.id and y.role=:role and x.module=:module</query>
+			<query>select x from Menu x,RoleMenu y where x.level=3 and x.id=y.menu.id and y.role=:role and x.module=:module order by x.order</query>
 		</named-query>
 		<attributes>
 			<id name="id">
