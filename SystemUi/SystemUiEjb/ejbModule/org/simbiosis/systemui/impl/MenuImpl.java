@@ -29,7 +29,6 @@ public class MenuImpl implements IMenu {
 
 	@Override
 	public List<Menu> listMenuByRole(long roleId) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
