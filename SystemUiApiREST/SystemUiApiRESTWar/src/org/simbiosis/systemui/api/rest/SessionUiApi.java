@@ -42,4 +42,11 @@ public class SessionUiApi {
 		return sessionManager.login(userName, password);
 	}
 
+	@GET()
+	@Path("/logout/{sessionName}")
+	@Produces("text/plain")
+	public String logout(@PathParam("sessionName") String sessionName) {
+		return sessionManager.logout(sessionName);
+	}
+
 }

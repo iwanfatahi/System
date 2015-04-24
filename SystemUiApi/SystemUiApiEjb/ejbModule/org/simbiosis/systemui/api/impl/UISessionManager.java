@@ -7,8 +7,10 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import org.simbiosis.system.api.bean.ISessionManager;
+import org.simbiosis.system.bean.IConfig;
 import org.simbiosis.system.bean.ISecurity;
 import org.simbiosis.system.bean.IUser;
+import org.simbiosis.system.model.Config;
 import org.simbiosis.system.model.Session;
 import org.simbiosis.system.model.User;
 import org.simbiosis.systemui.api.bean.IUISessionManager;
@@ -26,6 +28,8 @@ public class UISessionManager implements IUISessionManager {
 	ISecurity iSecurity;
 	@EJB(lookup = "java:global/System/SystemEjb/UserImpl")
 	IUser iUser;
+	@EJB(lookup = "java:global/System/SystemEjb/ConfigImpl")
+	IConfig iConfig;
 	@EJB(lookup = "java:global/SystemApi/SystemApiEjb/SessionManager")
 	ISessionManager iSessionManager;
 	@EJB(lookup = "java:global/SystemUi/SystemUiEjb/MenuImpl")
@@ -88,6 +92,14 @@ public class UISessionManager implements IUISessionManager {
 			return result;
 		}
 		return null;
+	}
+
+	@Override
+	public String logout(String sessionName) {
+		long company = iSessionManager.logout(sessionName);
+		// Ambil result
+		Config config = iConfig.get(company, "simbiosis.logout");
+		return config != null ? config.getStrValue() : "";
 	}
 
 }

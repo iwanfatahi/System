@@ -5,7 +5,7 @@ public interface ISessionManager {
 
 	String login(String userName, String password);
 
-	void logout(String sessionName);
+	long logout(String sessionName);
 
 	Boolean isValid(String sessionName);
 }

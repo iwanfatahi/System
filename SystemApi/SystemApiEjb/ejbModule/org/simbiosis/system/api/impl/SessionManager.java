@@ -63,21 +63,24 @@ public class SessionManager implements ISessionManager {
 	}
 
 	@Override
-	public void logout(String sessionName) {
+	public long logout(String sessionName) {
 		Session session = iSecurity.getSession(sessionName);
 		if (session != null) {
+			long company = session.getUser().getCompany().getId();
 			session.setEnd(new Date());
 			session.setValid(0);
 			iSecurity.saveSession(session);
 			// Log
 			systemLog.sendOperationLog(new OperationLog(session.getUser()
 					.getId(), session.getName(), "LOGOUT"));
+			return company;
 		}
+		return 0;
 	}
 
 	@Override
 	public Boolean isValid(String sessionName) {
-		// FIXME:Belum ada logikanya
+		// FIXME: Belum ada logikanya
 		Session session = iSecurity.getSession(sessionName);
 		return session != null;
 	}
