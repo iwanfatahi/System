@@ -2,6 +2,8 @@ package org.simbiosis.system.impl;
 
 import java.util.List;
 
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
@@ -10,6 +12,8 @@ import javax.persistence.Query;
 import org.simbiosis.system.bean.IConfig;
 import org.simbiosis.system.model.Config;
 
+@Stateless
+@Remote(IConfig.class)
 public class ConfigImpl implements IConfig {
 
 	@PersistenceContext(unitName = "SystemEjb", type = PersistenceContextType.TRANSACTION)
