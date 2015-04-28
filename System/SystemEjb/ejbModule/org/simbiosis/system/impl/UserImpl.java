@@ -19,6 +19,16 @@ public class UserImpl implements IUser {
 	@PersistenceContext(unitName = "SystemEjb", type = PersistenceContextType.TRANSACTION)
 	EntityManager em;
 
+	@Override
+	public User save(User user) {
+		if (user.getId() == 0) {
+			em.persist(user);
+		} else {
+			em.merge(user);
+		}
+		return user;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public User getUserByName(String name) {

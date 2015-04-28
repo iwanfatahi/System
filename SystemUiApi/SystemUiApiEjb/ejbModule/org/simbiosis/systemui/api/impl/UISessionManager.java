@@ -88,7 +88,17 @@ public class UISessionManager implements IUISessionManager {
 		result.setName(iSessionManager.login(userName, password));
 		if (!result.getName().isEmpty()) {
 			Session session = iSecurity.getSession(result.getName());
-			result.setFirstModule(session.getUser().getFirstModule());
+			User user = session.getUser();
+			result.setFirstModule(user.getFirstModule());
+			// Ambil result
+			Config config = iConfig.get(user.getCompany().getId(),
+					"simbiosis.login");
+			String redirect = "";
+			if (config != null) {
+				redirect = config.getStrValue() + user.getFirstModule()
+						+ "&session=" + result.getName();
+			}
+			result.setRedirect(redirect);
 			return result;
 		}
 		return null;
