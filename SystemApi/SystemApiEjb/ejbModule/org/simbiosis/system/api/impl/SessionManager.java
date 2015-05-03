@@ -85,4 +85,9 @@ public class SessionManager implements ISessionManager {
 		return session != null;
 	}
 
+	@Override
+	public Session getSession(String sessionName) {
+		return iSecurity.getSession(sessionName);
+	}
+
 }

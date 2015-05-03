@@ -3,6 +3,8 @@ package org.simbiosis.system.api.impl;
 import java.util.Date;
 
 import javax.ejb.EJB;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
 
 import org.simbiosis.system.api.bean.IUserManager;
 import org.simbiosis.system.bean.IOrganisation;
@@ -11,6 +13,8 @@ import org.simbiosis.system.model.Branch;
 import org.simbiosis.system.model.Company;
 import org.simbiosis.system.model.User;
 
+@Stateless
+@Remote(IUserManager.class)
 public class UserManager implements IUserManager {
 
 	@EJB(lookup = "java:global/System/SystemEjb/UserImpl")
