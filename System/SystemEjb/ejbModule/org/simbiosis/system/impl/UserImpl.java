@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
 import org.simbiosis.system.bean.IUser;
+import org.simbiosis.system.model.Role;
 import org.simbiosis.system.model.User;
 
 @Stateless
@@ -31,7 +32,7 @@ public class UserImpl implements IUser {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public User getUserByName(String name) {
+	public User getByName(String name) {
 		Query qry = em.createNamedQuery("getUserByName");
 		qry.setParameter("name", name);
 		List<User> users = qry.getResultList();
@@ -43,7 +44,7 @@ public class UserImpl implements IUser {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public User getActiveUserByName(String name) {
+	public User getByNameActive(String name) {
 		Query qry = em.createNamedQuery("getActiveUserByName");
 		qry.setParameter("name", name);
 		List<User> users = qry.getResultList();
@@ -51,6 +52,11 @@ public class UserImpl implements IUser {
 			return users.get(0);
 		}
 		return null;
+	}
+
+	@Override
+	public Role getRole(long id) {
+		return em.find(Role.class, id);
 	}
 
 }

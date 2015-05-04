@@ -42,7 +42,7 @@ public class SessionManager implements ISessionManager {
 			// Ambil password
 			String password = new String(bytePassword).substring(salt.length());
 			// Cari user dan cocokkan passwordnya
-			User user = iUser.getActiveUserByName(userName);
+			User user = iUser.getByNameActive(userName);
 			if (user != null && user.getPassword().equalsIgnoreCase(password)
 					&& user.getActive() == 1) {
 				Session session = new Session(iSecurity.getUriRandomHash(),

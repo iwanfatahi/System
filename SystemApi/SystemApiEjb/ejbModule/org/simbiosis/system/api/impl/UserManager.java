@@ -11,6 +11,8 @@ import org.simbiosis.system.bean.IOrganisation;
 import org.simbiosis.system.bean.IUser;
 import org.simbiosis.system.model.Branch;
 import org.simbiosis.system.model.Company;
+import org.simbiosis.system.model.Role;
+import org.simbiosis.system.model.SubBranch;
 import org.simbiosis.system.model.User;
 
 @Stateless
@@ -35,11 +37,32 @@ public class UserManager implements IUserManager {
 	}
 
 	@Override
-	public User save(long lcompany, long lbranch, User user) {
+	public User save(long lcompany, long lbranch, long lsubBranch, User user) {
 		Company company = iOrganisation.getCompany(lcompany);
 		Branch branch = iOrganisation.getBranch(lbranch);
+		SubBranch subBranch = iOrganisation.getSubBranch(lsubBranch);
 		user.setCompany(company);
 		user.setBranch(branch);
+		user.setSubBranch(subBranch);
+		return save(user);
+	}
+
+	@Override
+	public User saveAsMember(long lcompany, long lbranch, long lsubBranch,
+			User user) {
+		Company company = iOrganisation.getCompany(lcompany);
+		Branch branch = iOrganisation.getBranch(lbranch);
+		SubBranch subBranch = iOrganisation.getSubBranch(lsubBranch);
+		user.setCompany(company);
+		user.setBranch(branch);
+		user.setSubBranch(subBranch);
+		// Set untuk member
+		// FIXME: masih di hardcode...
+		Role role = iUser.getRole(5);
+		user.setRole(role);
+		user.setType(3);
+		user.setLevel(7);
+		//
 		return save(user);
 	}
 
