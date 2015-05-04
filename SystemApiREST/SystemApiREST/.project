@@ -5,6 +5,7 @@
 	<projects>
 		<project>SystemApiRESTWar</project>
 		<project>SystemApiIntf</project>
+		<project>SystemIntf</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

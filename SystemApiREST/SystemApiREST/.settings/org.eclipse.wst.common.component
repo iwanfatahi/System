@@ -8,5 +8,8 @@
         <dependent-module archiveName="SystemApiIntf.jar" deploy-path="/lib" handle="module:/resource/SystemApiIntf/SystemApiIntf">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="SystemIntf.jar" deploy-path="/lib" handle="module:/resource/SystemIntf/SystemIntf">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>
