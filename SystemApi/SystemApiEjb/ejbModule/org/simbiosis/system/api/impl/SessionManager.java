@@ -41,10 +41,9 @@ public class SessionManager implements ISessionManager {
 					.parseBase64Binary(passwordB64);
 			// Ambil password
 			String password = new String(bytePassword).substring(salt.length());
-			// Cari user dan cocokkan passwordnya
-			User user = iUser.getByNameActive(userName);
-			if (user != null && user.getPassword().equalsIgnoreCase(password)
-					&& user.getActive() == 1) {
+			// Cari user dan cocokkan passwordnya, syaratnya aktif
+			User user = iUser.getByName(userName, 1);
+			if (user != null && user.getPassword().equalsIgnoreCase(password)) {
 				Session session = new Session(iSecurity.getUriRandomHash(),
 						user);
 				iSecurity.saveSession(session);

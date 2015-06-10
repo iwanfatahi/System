@@ -32,21 +32,13 @@ public class UserImpl implements IUser {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public User getByName(String name) {
-		Query qry = em.createNamedQuery("getUserByName");
+	public User getByName(String name, int status) {
+		String strQry = (status < 2) ? "getUserByNameStatus" : "getUserByName";
+		Query qry = em.createNamedQuery(strQry);
 		qry.setParameter("name", name);
-		List<User> users = qry.getResultList();
-		if (users.size() == 1) {
-			return users.get(0);
+		if (status < 2) {
+			qry.setParameter("status", status);
 		}
-		return null;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public User getByNameActive(String name) {
-		Query qry = em.createNamedQuery("getActiveUserByName");
-		qry.setParameter("name", name);
 		List<User> users = qry.getResultList();
 		if (users.size() == 1) {
 			return users.get(0);

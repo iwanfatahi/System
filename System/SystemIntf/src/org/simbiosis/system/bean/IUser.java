@@ -6,11 +6,7 @@ import org.simbiosis.system.model.User;
 public interface IUser {
 	User save(User user);
 
-	User getByName(String name);
-
-	User getByNameActive(String name);
-	
-	//
+	User getByName(String name, int status);
 	
 	Role getRole(long id);
 }

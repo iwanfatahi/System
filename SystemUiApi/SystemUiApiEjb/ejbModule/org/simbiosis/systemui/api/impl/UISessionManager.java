@@ -86,6 +86,7 @@ public class UISessionManager implements IUISessionManager {
 	public SimpleSessionDto login(String userName, String password) {
 		SimpleSessionDto result = new SimpleSessionDto();
 		result.setName(iSessionManager.login(userName, password));
+		System.out.println("Hasil "+result.getName());
 		if (!result.getName().isEmpty()) {
 			Session session = iSecurity.getSession(result.getName());
 			User user = session.getUser();

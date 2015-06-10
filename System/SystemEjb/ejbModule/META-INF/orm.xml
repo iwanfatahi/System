@@ -108,7 +108,7 @@
 				<column name="SBR_ADDRESS" length="100" />
 			</basic>
 			<basic name="company">
-				<column name="COM_ID"/>
+				<column name="COM_ID" />
 			</basic>
 			<many-to-one name="branch">
 				<join-column name="BRN_ID" referenced-column-name="BRN_ID" />
@@ -131,8 +131,8 @@
 			<id name="id">
 				<column name="AUT_ID" />
 				<generated-value strategy="TABLE" generator="sys_auth_id" />
-				<table-generator name="sys_auth_id"
-					pk-column-value="sys_auth_id" allocation-size="1">
+				<table-generator name="sys_auth_id" pk-column-value="sys_auth_id"
+					allocation-size="1">
 				</table-generator>
 			</id>
 			<basic name="description">
@@ -175,8 +175,8 @@
 			<id name="id">
 				<column name="ROL_ID" />
 				<generated-value strategy="TABLE" generator="sys_role_id" />
-				<table-generator name="sys_role_id"
-					pk-column-value="sys_role_id" allocation-size="1">
+				<table-generator name="sys_role_id" pk-column-value="sys_role_id"
+					allocation-size="1">
 				</table-generator>
 			</id>
 			<basic name="name">
@@ -227,13 +227,13 @@
 	<entity class="org.simbiosis.system.model.User">
 		<table name="SYS_USER">
 		</table>
-		<named-query name="getActiveUserByName">
-			<query>select x from User x where x.name=:name and x.active=1</query>
+		<named-query name="getUserByNameStatus">
+			<query>select x from User x where x.name=:name and x.active=:status</query>
 		</named-query>
 		<named-query name="getUserByName">
 			<query>select x from User x where x.name=:name</query>
 		</named-query>
-				<named-query name="listUsers1">
+		<named-query name="listUsers1">
 			<query>select x from User x where x.company.id=:company order by x.branch,x.name</query>
 		</named-query>
 		<named-query name="listUsers2">
@@ -249,8 +249,8 @@
 			<id name="id">
 				<column name="USR_ID" />
 				<generated-value strategy="TABLE" generator="sys_user_id" />
-				<table-generator name="sys_user_id"
-					pk-column-value="sys_user_id" allocation-size="1">
+				<table-generator name="sys_user_id" pk-column-value="sys_user_id"
+					allocation-size="1">
 				</table-generator>
 			</id>
 			<basic name="name">
@@ -272,22 +272,22 @@
 				<column name="USR_ACTIVE" />
 			</basic>
 			<basic name="type">
-				<column name="USR_TYPE"/>
+				<column name="USR_TYPE" />
 			</basic>
 			<basic name="userUpdate">
-				<column name="USR_USERUPDATE"/>
+				<column name="USR_USERUPDATE" />
 			</basic>
 			<basic name="userCreate">
-				<column name="USR_USERCREATE"/>
+				<column name="USR_USERCREATE" />
 			</basic>
 			<basic name="tsUpdate">
-				<column name="USR_TSUPDATE"/>
+				<column name="USR_TSUPDATE" />
 			</basic>
 			<basic name="tsCreate">
-				<column name="USR_TSCREATE"/>
+				<column name="USR_TSCREATE" />
 			</basic>
 			<basic name="firstModule">
-				<column name="USR_FIRSTMODULE"/>
+				<column name="USR_FIRSTMODULE" />
 			</basic>
 			<many-to-one name="role">
 				<join-column name="ROL_ID" referenced-column-name="ROL_ID" />
@@ -342,13 +342,13 @@
 		</table>
 		<attributes>
 			<id name="value">
-				<column name="SLT_VALUE" length="100"/>
+				<column name="SLT_VALUE" length="100" />
 			</id>
 			<basic name="timestamp">
-				<column name="SLT_TIMESTAMP"/>
+				<column name="SLT_TIMESTAMP" />
 			</basic>
 			<basic name="valid">
-				<column name="SLT_VALID"/>
+				<column name="SLT_VALID" />
 			</basic>
 		</attributes>
 	</entity>
