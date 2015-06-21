@@ -1,34 +1,15 @@
 package org.simbiosis.systemui.api.dto;
 
-import java.io.Serializable;
+import org.simbiosis.systemui.model.Menu;
 
-public class MenuDto implements Serializable {
+public class MenuDto extends Menu {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5186145470199478350L;
-	long id;
 	String grandParentTitle;
 	String parentTitle;
-	String title;
-	String icon;
 	String link;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
 
 	public String getGrandParentTitle() {
 		return grandParentTitle;
@@ -44,14 +25,6 @@ public class MenuDto implements Serializable {
 
 	public void setParentTitle(String parentTitle) {
 		this.parentTitle = parentTitle;
-	}
-
-	public String getIcon() {
-		return icon;
-	}
-
-	public void setIcon(String icon) {
-		this.icon = icon;
 	}
 
 	public String getLink() {

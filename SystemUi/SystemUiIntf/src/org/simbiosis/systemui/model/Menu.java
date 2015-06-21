@@ -8,16 +8,17 @@ public class Menu implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -5330497849439890759L;
-	long id;
-	int order;
-	String title;
-	String module;
-	String place;
-	String icon;
-	int level;
+	private long id;
+	private int order;
+	private String title;
+	private String module;
+	private String place;
+	private String icon;
+	private int level;
+	private int visible;
 
-	Application application;
-	Menu parent;
+	private Application application;
+	private Menu parent;
 
 	public int getOrder() {
 		return order;
@@ -89,6 +90,14 @@ public class Menu implements Serializable {
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+	public int getVisible() {
+		return visible;
+	}
+
+	public void setVisible(int visible) {
+		this.visible = visible;
 	}
 
 }

@@ -14,6 +14,7 @@ public class SystemUiApiRest extends Application {
 	public SystemUiApiRest() {
 		classes.add(SessionUiApi.class);
 		classes.add(MenuApi.class);
+		classes.add(ConfigApi.class);
 		// singletons.add(new SessionApi());
 	}
 

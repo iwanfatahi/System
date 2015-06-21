@@ -36,6 +36,8 @@ public class MenuManager implements IMenuManager {
 				MenuDto dto = new MenuDto();
 				dto.setId(menu.getId());
 				dto.setTitle(menu.getTitle());
+				dto.setVisible(menu.getVisible());
+				dto.setLevel(menu.getLevel());
 				Menu parent = menu.getParent();
 				if (parent != null) {
 					dto.setParentTitle(parent.getTitle());

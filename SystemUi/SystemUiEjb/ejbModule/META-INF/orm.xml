@@ -71,6 +71,9 @@
 			<basic name="order">
 				<column name="MEN_ORDER"/>
 			</basic>
+			<basic name="visible">
+				<column name="MEN_VISIBLE"/>
+			</basic>
 			<many-to-one name="parent">
 				<join-column name="PARENT_ID" referenced-column-name="MEN_ID"/>
 			</many-to-one>
