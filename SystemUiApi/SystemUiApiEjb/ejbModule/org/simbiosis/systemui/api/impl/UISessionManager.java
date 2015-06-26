@@ -67,6 +67,7 @@ public class UISessionManager implements IUISessionManager {
 				mdto.setIcon(menu.getIcon());
 				String[] placeStrings = menu.getPlace().split("\\.");
 				mdto.setLink(placeStrings[placeStrings.length - 1]);
+				mdto.setPlace(menu.getPlace());
 				mdto.setVisible(menu.getVisible());
 				Menu parent = menu.getParent();
 				if (parent != null) {
