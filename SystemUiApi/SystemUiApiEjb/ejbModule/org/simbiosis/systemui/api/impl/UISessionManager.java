@@ -96,6 +96,7 @@ public class UISessionManager implements IUISessionManager {
 			// Ambil result
 			Config config = iConfig.get(user.getCompany().getId(),
 					"simbiosis.login");
+			result.setBaseRedirect(config.getStrValue());
 			String redirect = "";
 			if (config != null) {
 				redirect = config.getStrValue() + user.getFirstModule()

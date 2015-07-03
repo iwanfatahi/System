@@ -352,4 +352,28 @@
 			</basic>
 		</attributes>
 	</entity>
+	<entity class="org.simbiosis.system.model.RefProvCity">
+		<table name="SYS_REFPROVCITY">
+		</table>
+		<attributes>
+			<id name="id">
+				<column name="RPC_ID"/>
+				<generated-value strategy="TABLE" generator="sys_refprovcity_id"/>
+				<table-generator name="sys_refprovcity_id" pk-column-value="sys_refprovcity_id" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="level">
+				<column name="RPC_LEVEL"/>
+			</basic>
+			<basic name="name">
+				<column name="RPC_NAME" length="200"/>
+			</basic>
+			<basic name="code">
+				<column name="RPC_CODE" length="30"/>
+			</basic>
+			<basic name="prov">
+				<column name="RPC_PROV"/>
+			</basic>
+		</attributes>
+	</entity>
 </entity-mappings>

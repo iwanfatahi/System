@@ -11,6 +11,7 @@ public class SimpleSessionDto implements Serializable {
 	private String name;
 	private String firstModule;
 	private String redirect;
+	private String baseRedirect;
 
 	public SimpleSessionDto() {
 		name = "";
@@ -39,6 +40,14 @@ public class SimpleSessionDto implements Serializable {
 
 	public void setRedirect(String redirect) {
 		this.redirect = redirect;
+	}
+
+	public String getBaseRedirect() {
+		return baseRedirect;
+	}
+
+	public void setBaseRedirect(String baseRedirect) {
+		this.baseRedirect = baseRedirect;
 	}
 
 }
